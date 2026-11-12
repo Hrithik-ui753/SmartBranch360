@@ -1,0 +1,84 @@
+SW1#show running-config
+Building configuration...
+
+Current configuration : 1582 bytes
+!
+version 15.0
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname SW1
+!
+enable secret 5 $1$mERr$VNl1HrkoeysF3ddlTBve81
+!
+no ip domain-lookup
+ip domain-name smartbranch.local
+!
+username netadmin privilege 15 secret 5 $1$mERr$VNl1HrkoeysF3ddlTBve81
+!
+ip ssh version 2
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan 10
+ name EMPLOYEE
+vlan 20
+ name GUEST
+vlan 30
+ name SERVER
+vlan 99
+ name MANAGEMENT
+!
+interface FastEthernet0/1
+ shutdown
+!
+interface FastEthernet0/5
+ description INTERNAL_SERVER
+ switchport access vlan 30
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ description MANAGEMENT_PC
+ switchport access vlan 99
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/24
+ description TRUNK_TO_SW2_F0/24
+ switchport trunk allowed vlan 10,20,30,99
+ switchport mode trunk
+!
+interface GigabitEthernet0/1
+ description TRUNK_TO_R1_G0/0
+ switchport trunk allowed vlan 10,20,30,99
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan99
+ ip address 10.10.99.2 255.255.255.0
+ no shutdown
+!
+ip default-gateway 10.10.99.1
+!
+ip access-list standard SSH-MGMT
+ permit 10.10.99.0 0.0.0.255
+ deny any
+!
+line con 0
+!
+line vty 0 15
+ access-class SSH-MGMT in
+ login local
+ transport input ssh
+!
+end
+

@@ -1,0 +1,108 @@
+R1#show running-config
+Building configuration...
+
+Current configuration : 2275 bytes
+!
+version 15.1
+service timestamps log datetime msec
+service timestamps debug datetime msec
+service password-encryption
+!
+hostname R1
+!
+enable secret 5 $1$mERr$VNl1HrkoeysF3ddlTBve81
+!
+no ip domain-lookup
+ip domain-name smartbranch.local
+!
+ip dhcp excluded-address 10.10.10.1 10.10.10.20
+ip dhcp excluded-address 10.10.20.1 10.10.20.20
+!
+ip dhcp pool EMPLOYEE
+ network 10.10.10.0 255.255.255.0
+ default-router 10.10.10.1 
+ dns-server 10.10.30.10 
+ip dhcp pool GUEST
+ network 10.10.20.0 255.255.255.0
+ default-router 10.10.20.1 
+ dns-server 8.8.8.8 
+!
+ip cef
+no ipv6 cef
+!
+username netadmin privilege 15 secret 5 $1$mERr$VNl1HrkoeysF3ddlTBve81
+!
+ip ssh version 2
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ no shutdown
+!
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 10.10.10.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 10.10.20.1 255.255.255.0
+ ip access-group GUEST-IN in
+ ip nat inside
+!
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 10.10.30.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/0.99
+ encapsulation dot1Q 99
+ ip address 10.10.99.1 255.255.255.0
+ ip nat inside
+!
+interface GigabitEthernet0/1
+ ip address 203.0.113.2 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+ no shutdown
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+!
+ip nat inside source list 1 interface GigabitEthernet0/1 overload
+ip route 0.0.0.0 0.0.0.0 203.0.113.1 
+!
+ip access-list standard 1
+ permit 10.10.0.0 0.0.255.255
+ip access-list standard SSH-MGMT
+ permit 10.10.99.0 0.0.0.255
+ deny any
+!
+ip access-list extended GUEST-IN
+ deny ip 10.10.20.0 0.0.0.255 10.10.10.0 0.0.0.255
+ deny ip 10.10.20.0 0.0.0.255 10.10.30.0 0.0.0.255
+ deny ip 10.10.20.0 0.0.0.255 10.10.99.0 0.0.0.255
+ permit ip 10.10.20.0 0.0.0.255 any
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ access-class SSH-MGMT in
+ login local
+ transport input ssh
+!
+end
+

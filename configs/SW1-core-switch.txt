@@ -1,0 +1,68 @@
+enable
+configure terminal
+hostname SW1
+no ip domain-lookup
+enable secret Str0ngEnableSecret
+service password-encryption
+ip domain-name smartbranch.local
+username netadmin privilege 15 secret NetAdm1nSecret
+crypto key generate rsa modulus 1024
+ip ssh version 2
+
+vlan 10
+ name EMPLOYEE
+vlan 20
+ name GUEST
+vlan 30
+ name SERVER
+vlan 99
+ name MANAGEMENT
+
+! Trunk to R1
+interface GigabitEthernet0/1
+ description TRUNK_TO_R1_G0/0
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,99
+ no shutdown
+exit
+
+! Trunk to SW2
+interface FastEthernet0/24
+ description TRUNK_TO_SW2_F0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,99
+ no shutdown
+exit
+
+interface FastEthernet0/5
+ description INTERNAL_SERVER
+ switchport mode access
+ switchport access vlan 30
+ spanning-tree portfast
+ no shutdown
+exit
+interface FastEthernet0/6
+ description MANAGEMENT_PC
+ switchport mode access
+ switchport access vlan 99
+ spanning-tree portfast
+ no shutdown
+exit
+
+interface vlan 99
+ ip address 10.10.99.2 255.255.255.0
+ no shutdown
+exit
+ip default-gateway 10.10.99.1
+
+ip access-list standard SSH-MGMT
+ permit 10.10.99.0 0.0.0.255
+ deny any
+exit
+line vty 0 15
+ login local
+ transport input ssh
+ access-class SSH-MGMT in
+exit
+end
+write memory

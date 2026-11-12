@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartBranch360 - Network Assurance Report</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --pass: #10b981;
+      --fail: #ef4444;
+      --warn: #f59e0b;
+      --accent: #3b82f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 2rem; line-height: 1.5; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    .title h1 { font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .title p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem; }
+    .score-badge { display: flex; align-items: center; gap: 1rem; background: var(--card-bg); padding: 0.75rem 1.5rem; border-radius: 0.75rem; border: 1px solid var(--border); }
+    .score-circle { font-size: 2rem; font-weight: 800; color: var(--pass); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .metric-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.25rem; border-radius: 0.75rem; }
+    .metric-card .num { font-size: 2rem; font-weight: 700; margin-top: 0.5rem; }
+    .section-title { font-size: 1.25rem; font-weight: 600; margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem; }
+    table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 0.75rem; overflow: hidden; margin-bottom: 2rem; border: 1px solid var(--border); }
+    th, td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    th { background: #162032; font-weight: 600; color: var(--text-muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
+    tr:last-child td { border-bottom: none; }
+    .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+    .badge-PASS { background: rgba(16, 185, 129, 0.2); color: var(--pass); border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-FAIL { background: rgba(239, 68, 68, 0.2); color: var(--fail); border: 1px solid rgba(239, 68, 68, 0.4); }
+    .badge-WARNING { background: rgba(245, 158, 11, 0.2); color: var(--warn); border: 1px solid rgba(245, 158, 11, 0.4); }
+    .remedy { color: #cbd5e1; font-family: monospace; font-size: 0.8rem; background: #0b1120; padding: 0.4rem 0.6rem; border-radius: 0.35rem; margin-top: 0.35rem; display: block; border-left: 3px solid var(--accent); }
+    .fault-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem; margin-bottom: 1rem; }
+    .fault-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .fault-title { font-weight: 600; font-size: 1.05rem; }
+    footer { border-top: 1px solid var(--border); padding-top: 1.5rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="title">
+        <h1>SmartBranch360 Network Assurance Report</h1>
+        <p>Site: <strong>SmartBranch360</strong> &bull; Generated: 2026-11-13 00:50:00</p>
+      </div>
+      <div class="score-badge">
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Network Health</div>
+          <div style="font-weight: 600;">Optimal</div>
+        </div>
+        <div class="score-circle">100%</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="metric-card">
+        <div style="color: var(--text-muted); font-size: 0.85rem;">Total Checks</div>
+        <div class="num">54</div>
+      </div>
+      <div class="metric-card">
+        <div style="color: var(--pass); font-size: 0.85rem;">Passed Checks</div>
+        <div class="num" style="color: var(--pass);">54</div>
+      </div>
+      <div class="metric-card">
+        <div style="color: var(--fail); font-size: 0.85rem;">Critical Failures</div>
+        <div class="num" style="color: var(--fail);">0</div>
+      </div>
+      <div class="metric-card">
+        <div style="color: var(--warn); font-size: 0.85rem;">Warnings</div>
+        <div class="num" style="color: var(--warn);">0</div>
+      </div>
+    </div>
+
+    <div class="section-title">Network Plan & Blueprint Invariants</div>
+    <table>
+      <thead>
+        <tr><th style="width: 100px;">Status</th><th style="width: 140px;">Category</th><th>Verification Item</th></tr>
+      </thead>
+      <tbody>
+        
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Schema</strong></td>
+                <td>Network plan root schema valid for site 'SmartBranch360'.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>VLAN</strong></td>
+                <td>All 4 VLANs, subnets, and gateways validated successfully without overlaps.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Devices</strong></td>
+                <td>All 4 static devices validated without IP conflicts.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Trunks</strong></td>
+                <td>All 3 trunk interfaces correctly propagate required VLANs.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Security</strong></td>
+                <td>Security plan strictly mandates guest-to-internal network isolation.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Security</strong></td>
+                <td>Management SSH restricted to dedicated CIDR: 10.10.99.0/24.</td>
+              </tr>
+            
+      </tbody>
+    </table>
+
+    <div class="section-title">Configuration Assurance (Intended vs Actual State)</div>
+    <table>
+      <thead>
+        <tr><th style="width: 100px;">Status</th><th style="width: 160px;">Category</th><th>Assurance Finding</th></tr>
+      </thead>
+      <tbody>
+        
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Router Interfaces</strong></td>
+                <td>Subinterface GigabitEthernet0/0.10 802.1Q dot1Q encapsulation verified for VLAN 10.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Router Interfaces</strong></td>
+                <td>Subinterface GigabitEthernet0/0.10 gateway IP 10.10.10.1 matches plan.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Router Interfaces</strong></td>
+                <td>Subinterface GigabitEthernet0/0.20 802.1Q dot1Q encapsulation verified for VLAN 20.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Router Interfaces</strong></td>
+                <td>Subinterface GigabitEthernet0/0.20 gateway IP 10.10.20.1 matches plan.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Router Interfaces</strong></td>
+                <td>Subinterface GigabitEthernet0/0.30 802.1Q dot1Q encapsulation verified for VLAN 30.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Router Interfaces</strong></td>
+                <td>Subinterface GigabitEthernet0/0.30 gateway IP 10.10.30.1 matches plan.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Router Interfaces</strong></td>
+                <td>Subinterface GigabitEthernet0/0.99 802.1Q dot1Q encapsulation verified for VLAN 99.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Router Interfaces</strong></td>
+                <td>Subinterface GigabitEthernet0/0.99 gateway IP 10.10.99.1 matches plan.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>DHCP Architecture</strong></td>
+                <td>DHCP pool 'EMPLOYEE' network scope 10.10.10.0/255.255.255.0 is correct.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>DHCP Architecture</strong></td>
+                <td>DHCP pool 'EMPLOYEE' default-router correctly points to gateway 10.10.10.1.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>DHCP Architecture</strong></td>
+                <td>DHCP pool 'GUEST' network scope 10.10.20.0/255.255.255.0 is correct.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>DHCP Architecture</strong></td>
+                <td>DHCP pool 'GUEST' default-router correctly points to gateway 10.10.20.1.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>NAT / PAT</strong></td>
+                <td>R1 has dynamic PAT overload rule configured on WAN interface.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>NAT / PAT</strong></td>
+                <td>WAN interface GigabitEthernet0/1 has 'ip nat outside' active.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>NAT / PAT</strong></td>
+                <td>All 4 branch subinterfaces have 'ip nat inside' enabled.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Routing</strong></td>
+                <td>Default gateway route 0.0.0.0/0 via ISP 203.0.113.1 verified.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Routing</strong></td>
+                <td>Default gateway route 0.0.0.0/0 via ISP 203.0.113.1 verified.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>R1 has Cisco SSH version 2 strictly enabled.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>R1 VTY lines enforce SSH only (Telnet completely disabled).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>R1 VTY lines restricted by access-class 'SSH-MGMT' in.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switching</strong></td>
+                <td>SW1 VLAN database contains all required branch VLANs (10, 20, 30, 99).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switching</strong></td>
+                <td>SW1 trunk FastEthernet0/24 correctly allows all branch VLANs.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switching</strong></td>
+                <td>SW1 trunk GigabitEthernet0/1 correctly allows all branch VLANs.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switching</strong></td>
+                <td>SW2 VLAN database contains all required branch VLANs (10, 20, 30, 99).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switching</strong></td>
+                <td>SW2 trunk FastEthernet0/24 correctly allows all branch VLANs.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switch Management</strong></td>
+                <td>SW1 SVI Vlan99 IP 10.10.99.2 correctly configured.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switch Management</strong></td>
+                <td>SW2 SVI Vlan99 IP 10.10.99.3 correctly configured.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>SW1 has Cisco SSH version 2 strictly enabled.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>SW1 VTY lines enforce SSH only (Telnet completely disabled).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>SW1 VTY lines restricted by access-class 'SSH-MGMT' in.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>SW2 has Cisco SSH version 2 strictly enabled.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>SW2 VTY lines enforce SSH only (Telnet completely disabled).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>SSH Hardening</strong></td>
+                <td>SW2 VTY lines restricted by access-class 'SSH-MGMT' in.</td>
+              </tr>
+            
+      </tbody>
+    </table>
+
+    <div class="section-title">Security & Hardening Audit</div>
+    <table>
+      <thead>
+        <tr><th style="width: 100px;">Status</th><th style="width: 160px;">Category</th><th>Security Compliance Finding</th></tr>
+      </thead>
+      <tbody>
+        
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Guest Isolation</strong></td>
+                <td>Guest VLAN 20 is strictly prohibited from accessing Server VLAN 30.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Guest Isolation</strong></td>
+                <td>Guest VLAN 20 is strictly prohibited from accessing Management VLAN 99.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Guest Isolation</strong></td>
+                <td>Guest ACL permits non-private / Internet-bound traffic after isolation denies.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Perimeter Hardening</strong></td>
+                <td>R1 SSH perimeter strictly permits only Management VLAN 99 (10.10.99.0/24).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>AAA & Credentials</strong></td>
+                <td>R1 has 'service password-encryption' enabled.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>AAA & Credentials</strong></td>
+                <td>R1 uses modern MD5/Type 5 enable secret.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switch Hygiene</strong></td>
+                <td>R1 interface Vlan1 is administratively shutdown (best practice).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Perimeter Hardening</strong></td>
+                <td>SW1 SSH perimeter strictly permits only Management VLAN 99 (10.10.99.0/24).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>AAA & Credentials</strong></td>
+                <td>SW1 has 'service password-encryption' enabled.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>AAA & Credentials</strong></td>
+                <td>SW1 uses modern MD5/Type 5 enable secret.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switch Hygiene</strong></td>
+                <td>SW1 interface Vlan1 is administratively shutdown (best practice).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Perimeter Hardening</strong></td>
+                <td>SW2 SSH perimeter strictly permits only Management VLAN 99 (10.10.99.0/24).</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>AAA & Credentials</strong></td>
+                <td>SW2 has 'service password-encryption' enabled.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>AAA & Credentials</strong></td>
+                <td>SW2 uses modern MD5/Type 5 enable secret.</td>
+              </tr>
+            
+              <tr>
+                <td><span class="badge badge-PASS">PASS</span></td>
+                <td><strong>Switch Hygiene</strong></td>
+                <td>SW2 interface Vlan1 is administratively shutdown (best practice).</td>
+              </tr>
+            
+      </tbody>
+    </table>
+
+    <div class="section-title">Automated Fault Detection & Diagnostic Benchmark</div>
+    
+              <div class="fault-card">
+                <div class="fault-header">
+                  <div class="fault-title">F1: Incorrect VLAN Assignment: VLAN 20 Missing on Trunk &mdash; <span style="color: var(--accent);">SW1 (FastEthernet0/24)</span></div>
+                  <span class="badge badge-FAIL">DETECTED</span>
+                </div>
+                <p style="margin-bottom: 0.5rem; color: #cbd5e1;">VLAN 20 was excluded from the allowed trunk VLAN list on SW1 port FastEthernet0/24 connecting to SW2.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Impact:</strong> Guest endpoints and wireless AP clients connected to SW2 are partitioned from R1; DHCP requests fail and clients receive 169.254.x.x.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Evidence:</strong> <code style="color: #f1f5f9;">switchport trunk allowed vlan 10,30,99 (VLAN 20 not allowed).</code></p>
+                <div class="remedy"><strong>Corrective Action:</strong><br>SW1(config)# interface FastEthernet0/24
+SW1(config-if)# switchport trunk allowed vlan 10,20,30,99</div>
+              </div>
+            
+              <div class="fault-card">
+                <div class="fault-header">
+                  <div class="fault-title">F2: Missing DHCP Configuration: EMPLOYEE Pool Absent &mdash; <span style="color: var(--accent);">R1 Router</span></div>
+                  <span class="badge badge-FAIL">DETECTED</span>
+                </div>
+                <p style="margin-bottom: 0.5rem; color: #cbd5e1;">The DHCP pool for VLAN 10 (EMPLOYEE) is missing from R1 configuration.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Impact:</strong> Employee desktop PCs fail to acquire network settings via DHCP DORA and cannot reach the internal server or internet.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Evidence:</strong> <code style="color: #f1f5f9;">DHCP pools defined on R1: ['GUEST'] (EMPLOYEE missing).</code></p>
+                <div class="remedy"><strong>Corrective Action:</strong><br>R1(config)# ip dhcp pool EMPLOYEE
+R1(dhcp-config)# network 10.10.10.0 255.255.255.0
+R1(dhcp-config)# default-router 10.10.10.1
+R1(dhcp-config)# dns-server 10.10.30.10</div>
+              </div>
+            
+              <div class="fault-card">
+                <div class="fault-header">
+                  <div class="fault-title">F3: Incorrect Gateway Address on Subinterface &mdash; <span style="color: var(--accent);">R1 (GigabitEthernet0/0.10)</span></div>
+                  <span class="badge badge-FAIL">DETECTED</span>
+                </div>
+                <p style="margin-bottom: 0.5rem; color: #cbd5e1;">Subinterface GigabitEthernet0/0.10 is configured with IP 10.10.10.254, but the network plan and DHCP specify 10.10.10.1.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Impact:</strong> Employee PCs sending packets to 10.10.10.1 fail ARP resolution; inter-VLAN routing and internet connectivity break.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Evidence:</strong> <code style="color: #f1f5f9;">ip address 10.10.10.254 255.255.255.0 on GigabitEthernet0/0.10.</code></p>
+                <div class="remedy"><strong>Corrective Action:</strong><br>R1(config)# interface GigabitEthernet0/0.10
+R1(config-subif)# ip address 10.10.10.1 255.255.255.0</div>
+              </div>
+            
+              <div class="fault-card">
+                <div class="fault-header">
+                  <div class="fault-title">F4: Missing NAT / PAT Translation Configuration &mdash; <span style="color: var(--accent);">R1 Router</span></div>
+                  <span class="badge badge-FAIL">DETECTED</span>
+                </div>
+                <p style="margin-bottom: 0.5rem; color: #cbd5e1;">R1 has no dynamic PAT overload statement linking internal branch subnets to WAN interface GigabitEthernet0/1.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Impact:</strong> Internal 10.10.0.0/16 packets exit to ISP without translation; ISP drops RFC 1918 private source packets.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Evidence:</strong> <code style="color: #f1f5f9;">No 'ip nat inside source list ... overload' detected in configuration.</code></p>
+                <div class="remedy"><strong>Corrective Action:</strong><br>R1(config)# ip access-list standard 1
+R1(config-std-nacl)# permit 10.10.0.0 0.0.255.255
+R1(config)# ip nat inside source list 1 interface GigabitEthernet0/1 overload</div>
+              </div>
+            
+              <div class="fault-card">
+                <div class="fault-header">
+                  <div class="fault-title">F5: Incorrect Guest ACL: Internal Subnet Denials Missing &mdash; <span style="color: var(--accent);">R1 (ip access-list extended GUEST-IN)</span></div>
+                  <span class="badge badge-FAIL">DETECTED</span>
+                </div>
+                <p style="margin-bottom: 0.5rem; color: #cbd5e1;">The Guest ACL contains a broad 'permit any' without preceding 'deny' rules for Server VLAN (10.10.30.0/24) and Management VLAN (10.10.99.0/24).</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Impact:</strong> Severe security breach: Guests can access internal company server and switch management interfaces directly.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;"><strong>Evidence:</strong> <code style="color: #f1f5f9;">ACL GUEST-IN permits 10.10.20.0/24 to any without blocking 10.10.30.0/24 or 10.10.99.0/24.</code></p>
+                <div class="remedy"><strong>Corrective Action:</strong><br>R1(config)# ip access-list extended GUEST-IN
+R1(config-ext-nacl)# 10 deny ip 10.10.20.0 0.0.0.255 10.10.30.0 0.0.0.255
+R1(config-ext-nacl)# 20 deny ip 10.10.20.0 0.0.0.255 10.10.99.0 0.0.0.255
+R1(config-ext-nacl)# 30 permit ip 10.10.20.0 0.0.0.255 any</div>
+              </div>
+            
+
+    <footer>
+      SmartBranch360 Enterprise Assurance System &bull; Cisco Packet Tracer Certified Blueprint &bull; College &amp; Portfolio Production Standard
+    </footer>
+  </div>
+</body>
+</html>

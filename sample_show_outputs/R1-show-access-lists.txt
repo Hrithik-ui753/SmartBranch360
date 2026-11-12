@@ -1,0 +1,12 @@
+R1#show access-lists
+Standard IP access list 1
+    10 permit 10.10.0.0 0.0.255.255 (142 matches)
+Standard IP access list SSH-MGMT
+    10 permit 10.10.99.0 0.0.0.255 (24 matches)
+    20 deny   any (8 matches)
+Extended IP access list GUEST-IN
+    10 deny ip 10.10.20.0 0.0.0.255 10.10.10.0 0.0.0.255 (12 matches)
+    20 deny ip 10.10.20.0 0.0.0.255 10.10.30.0 0.0.0.255 (38 matches)
+    30 deny ip 10.10.20.0 0.0.0.255 10.10.99.0 0.0.0.255 (15 matches)
+    40 permit ip 10.10.20.0 0.0.0.255 any (189 matches)
+

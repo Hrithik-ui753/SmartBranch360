@@ -1,0 +1,15 @@
+ISP#show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+
+Gateway of last resort is not set
+
+      198.51.100.0/24 is variably subnetted, 2 subnets, 2 masks
+C        198.51.100.0/24 is directly connected, GigabitEthernet0/1
+L        198.51.100.1/32 is directly connected, GigabitEthernet0/1
+      203.0.113.0/24 is variably subnetted, 2 subnets, 2 masks
+C        203.0.113.0/30 is directly connected, GigabitEthernet0/0
+L        203.0.113.1/32 is directly connected, GigabitEthernet0/0
+

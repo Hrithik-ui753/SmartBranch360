@@ -1,0 +1,15 @@
+! Fault 1: Incorrect VLAN assignment (VLAN 20 removed from SW1 Fa0/24 trunk)
+hostname SW1
+!
+vlan 10
+ name EMPLOYEE
+vlan 30
+ name SERVER
+vlan 99
+ name MANAGEMENT
+!
+interface FastEthernet0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 10,30,99
+!
+

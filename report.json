@@ -1,0 +1,615 @@
+{
+  "site": "SmartBranch360",
+  "timestamp": "2026-11-13 00:50:01",
+  "health_score": 100,
+  "metrics": {
+    "total_checks": 54,
+    "passed": 54,
+    "failed": 0,
+    "warnings": 0
+  },
+  "findings": {
+    "plan": [
+      {
+        "status": "PASS",
+        "code": "PLAN_ROOT_SCHEMA_VALID",
+        "category": "Schema",
+        "message": "Network plan root schema valid for site 'SmartBranch360'.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "PLAN_VLANS_VALID",
+        "category": "VLAN",
+        "message": "All 4 VLANs, subnets, and gateways validated successfully without overlaps.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "PLAN_DEVICES_VALID",
+        "category": "Devices",
+        "message": "All 4 static devices validated without IP conflicts.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "PLAN_TRUNKS_VALID",
+        "category": "Trunks",
+        "message": "All 3 trunk interfaces correctly propagate required VLANs.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "PLAN_GUEST_ISOLATION_ENFORCED",
+        "category": "Security",
+        "message": "Security plan strictly mandates guest-to-internal network isolation.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "PLAN_SSH_SUBNET_VALID",
+        "category": "Security",
+        "message": "Management SSH restricted to dedicated CIDR: 10.10.99.0/24.",
+        "remediation": null,
+        "details": {}
+      }
+    ],
+    "assurance": [
+      {
+        "status": "PASS",
+        "code": "ASSURE_ENCAPSULATION_VALID_VLAN_10",
+        "category": "Router Interfaces",
+        "message": "Subinterface GigabitEthernet0/0.10 802.1Q dot1Q encapsulation verified for VLAN 10.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_GATEWAY_IP_VALID_VLAN_10",
+        "category": "Router Interfaces",
+        "message": "Subinterface GigabitEthernet0/0.10 gateway IP 10.10.10.1 matches plan.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_ENCAPSULATION_VALID_VLAN_20",
+        "category": "Router Interfaces",
+        "message": "Subinterface GigabitEthernet0/0.20 802.1Q dot1Q encapsulation verified for VLAN 20.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_GATEWAY_IP_VALID_VLAN_20",
+        "category": "Router Interfaces",
+        "message": "Subinterface GigabitEthernet0/0.20 gateway IP 10.10.20.1 matches plan.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_ENCAPSULATION_VALID_VLAN_30",
+        "category": "Router Interfaces",
+        "message": "Subinterface GigabitEthernet0/0.30 802.1Q dot1Q encapsulation verified for VLAN 30.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_GATEWAY_IP_VALID_VLAN_30",
+        "category": "Router Interfaces",
+        "message": "Subinterface GigabitEthernet0/0.30 gateway IP 10.10.30.1 matches plan.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_ENCAPSULATION_VALID_VLAN_99",
+        "category": "Router Interfaces",
+        "message": "Subinterface GigabitEthernet0/0.99 802.1Q dot1Q encapsulation verified for VLAN 99.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_GATEWAY_IP_VALID_VLAN_99",
+        "category": "Router Interfaces",
+        "message": "Subinterface GigabitEthernet0/0.99 gateway IP 10.10.99.1 matches plan.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_DHCP_SCOPE_VALID_VLAN_10",
+        "category": "DHCP Architecture",
+        "message": "DHCP pool 'EMPLOYEE' network scope 10.10.10.0/255.255.255.0 is correct.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_DHCP_DEFAULT_ROUTER_VALID_VLAN_10",
+        "category": "DHCP Architecture",
+        "message": "DHCP pool 'EMPLOYEE' default-router correctly points to gateway 10.10.10.1.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_DHCP_SCOPE_VALID_VLAN_20",
+        "category": "DHCP Architecture",
+        "message": "DHCP pool 'GUEST' network scope 10.10.20.0/255.255.255.0 is correct.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_DHCP_DEFAULT_ROUTER_VALID_VLAN_20",
+        "category": "DHCP Architecture",
+        "message": "DHCP pool 'GUEST' default-router correctly points to gateway 10.10.20.1.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_NAT_OVERLOAD_ACTIVE",
+        "category": "NAT / PAT",
+        "message": "R1 has dynamic PAT overload rule configured on WAN interface.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_WAN_NAT_OUTSIDE_VALID",
+        "category": "NAT / PAT",
+        "message": "WAN interface GigabitEthernet0/1 has 'ip nat outside' active.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_NAT_INSIDE_VALID",
+        "category": "NAT / PAT",
+        "message": "All 4 branch subinterfaces have 'ip nat inside' enabled.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_DEFAULT_ROUTE_VALID",
+        "category": "Routing",
+        "message": "Default gateway route 0.0.0.0/0 via ISP 203.0.113.1 verified.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_DEFAULT_ROUTE_VALID",
+        "category": "Routing",
+        "message": "Default gateway route 0.0.0.0/0 via ISP 203.0.113.1 verified.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_R1_SSH_V2",
+        "category": "SSH Hardening",
+        "message": "R1 has Cisco SSH version 2 strictly enabled.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_R1_VTY_SSH_ONLY",
+        "category": "SSH Hardening",
+        "message": "R1 VTY lines enforce SSH only (Telnet completely disabled).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_R1_VTY_ACCESS_CLASS",
+        "category": "SSH Hardening",
+        "message": "R1 VTY lines restricted by access-class 'SSH-MGMT' in.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW1_VLANS_COMPLETE",
+        "category": "Switching",
+        "message": "SW1 VLAN database contains all required branch VLANs (10, 20, 30, 99).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW1_TRUNK_VALID_FastEthernet0/24",
+        "category": "Switching",
+        "message": "SW1 trunk FastEthernet0/24 correctly allows all branch VLANs.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW1_TRUNK_VALID_GigabitEthernet0/1",
+        "category": "Switching",
+        "message": "SW1 trunk GigabitEthernet0/1 correctly allows all branch VLANs.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW2_VLANS_COMPLETE",
+        "category": "Switching",
+        "message": "SW2 VLAN database contains all required branch VLANs (10, 20, 30, 99).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW2_TRUNK_VALID_FastEthernet0/24",
+        "category": "Switching",
+        "message": "SW2 trunk FastEthernet0/24 correctly allows all branch VLANs.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW1_SVI_IP_VALID",
+        "category": "Switch Management",
+        "message": "SW1 SVI Vlan99 IP 10.10.99.2 correctly configured.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW2_SVI_IP_VALID",
+        "category": "Switch Management",
+        "message": "SW2 SVI Vlan99 IP 10.10.99.3 correctly configured.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW1_SSH_V2",
+        "category": "SSH Hardening",
+        "message": "SW1 has Cisco SSH version 2 strictly enabled.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW1_VTY_SSH_ONLY",
+        "category": "SSH Hardening",
+        "message": "SW1 VTY lines enforce SSH only (Telnet completely disabled).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW1_VTY_ACCESS_CLASS",
+        "category": "SSH Hardening",
+        "message": "SW1 VTY lines restricted by access-class 'SSH-MGMT' in.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW2_SSH_V2",
+        "category": "SSH Hardening",
+        "message": "SW2 has Cisco SSH version 2 strictly enabled.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW2_VTY_SSH_ONLY",
+        "category": "SSH Hardening",
+        "message": "SW2 VTY lines enforce SSH only (Telnet completely disabled).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "ASSURE_SW2_VTY_ACCESS_CLASS",
+        "category": "SSH Hardening",
+        "message": "SW2 VTY lines restricted by access-class 'SSH-MGMT' in.",
+        "remediation": null,
+        "details": {}
+      }
+    ],
+    "security": [
+      {
+        "status": "PASS",
+        "code": "SEC_GUEST_SERVER_ISOLATED",
+        "category": "Guest Isolation",
+        "message": "Guest VLAN 20 is strictly prohibited from accessing Server VLAN 30.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_GUEST_MGMT_ISOLATED",
+        "category": "Guest Isolation",
+        "message": "Guest VLAN 20 is strictly prohibited from accessing Management VLAN 99.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_GUEST_OUTBOUND_PERMITTED",
+        "category": "Guest Isolation",
+        "message": "Guest ACL permits non-private / Internet-bound traffic after isolation denies.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_R1_SSH_MGMT_ENFORCED",
+        "category": "Perimeter Hardening",
+        "message": "R1 SSH perimeter strictly permits only Management VLAN 99 (10.10.99.0/24).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_R1_PASSWORD_ENCRYPTION_ACTIVE",
+        "category": "AAA & Credentials",
+        "message": "R1 has 'service password-encryption' enabled.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_R1_ENABLE_SECRET_ACTIVE",
+        "category": "AAA & Credentials",
+        "message": "R1 uses modern MD5/Type 5 enable secret.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_R1_VLAN1_SHUTDOWN",
+        "category": "Switch Hygiene",
+        "message": "R1 interface Vlan1 is administratively shutdown (best practice).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_SW1_SSH_MGMT_ENFORCED",
+        "category": "Perimeter Hardening",
+        "message": "SW1 SSH perimeter strictly permits only Management VLAN 99 (10.10.99.0/24).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_SW1_PASSWORD_ENCRYPTION_ACTIVE",
+        "category": "AAA & Credentials",
+        "message": "SW1 has 'service password-encryption' enabled.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_SW1_ENABLE_SECRET_ACTIVE",
+        "category": "AAA & Credentials",
+        "message": "SW1 uses modern MD5/Type 5 enable secret.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_SW1_VLAN1_SHUTDOWN",
+        "category": "Switch Hygiene",
+        "message": "SW1 interface Vlan1 is administratively shutdown (best practice).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_SW2_SSH_MGMT_ENFORCED",
+        "category": "Perimeter Hardening",
+        "message": "SW2 SSH perimeter strictly permits only Management VLAN 99 (10.10.99.0/24).",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_SW2_PASSWORD_ENCRYPTION_ACTIVE",
+        "category": "AAA & Credentials",
+        "message": "SW2 has 'service password-encryption' enabled.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_SW2_ENABLE_SECRET_ACTIVE",
+        "category": "AAA & Credentials",
+        "message": "SW2 uses modern MD5/Type 5 enable secret.",
+        "remediation": null,
+        "details": {}
+      },
+      {
+        "status": "PASS",
+        "code": "SEC_SW2_VLAN1_SHUTDOWN",
+        "category": "Switch Hygiene",
+        "message": "SW2 interface Vlan1 is administratively shutdown (best practice).",
+        "remediation": null,
+        "details": {}
+      }
+    ]
+  },
+  "faults": [
+    {
+      "id": "F1",
+      "title": "Incorrect VLAN Assignment: VLAN 20 Missing on Trunk",
+      "affected_device": "SW1 (FastEthernet0/24)",
+      "status": "DETECTED",
+      "explanation": "VLAN 20 was excluded from the allowed trunk VLAN list on SW1 port FastEthernet0/24 connecting to SW2.",
+      "impact": "Guest endpoints and wireless AP clients connected to SW2 are partitioned from R1; DHCP requests fail and clients receive 169.254.x.x.",
+      "evidence": "switchport trunk allowed vlan 10,30,99 (VLAN 20 not allowed).",
+      "remediation": "SW1(config)# interface FastEthernet0/24\nSW1(config-if)# switchport trunk allowed vlan 10,20,30,99",
+      "expected_result": "Trunk encapsulation carries 802.1Q tag 20; guest clients receive 10.10.20.x IP leases and ping gateway 10.10.20.1."
+    },
+    {
+      "id": "F2",
+      "title": "Missing DHCP Configuration: EMPLOYEE Pool Absent",
+      "affected_device": "R1 Router",
+      "status": "DETECTED",
+      "explanation": "The DHCP pool for VLAN 10 (EMPLOYEE) is missing from R1 configuration.",
+      "impact": "Employee desktop PCs fail to acquire network settings via DHCP DORA and cannot reach the internal server or internet.",
+      "evidence": "DHCP pools defined on R1: ['GUEST'] (EMPLOYEE missing).",
+      "remediation": "R1(config)# ip dhcp pool EMPLOYEE\nR1(dhcp-config)# network 10.10.10.0 255.255.255.0\nR1(dhcp-config)# default-router 10.10.10.1\nR1(dhcp-config)# dns-server 10.10.30.10",
+      "expected_result": "R1 DHCP daemon responds to DHCPDISCOVER with DHCPOFFER in 10.10.10.0/24 range."
+    },
+    {
+      "id": "F3",
+      "title": "Incorrect Gateway Address on Subinterface",
+      "affected_device": "R1 (GigabitEthernet0/0.10)",
+      "status": "DETECTED",
+      "explanation": "Subinterface GigabitEthernet0/0.10 is configured with IP 10.10.10.254, but the network plan and DHCP specify 10.10.10.1.",
+      "impact": "Employee PCs sending packets to 10.10.10.1 fail ARP resolution; inter-VLAN routing and internet connectivity break.",
+      "evidence": "ip address 10.10.10.254 255.255.255.0 on GigabitEthernet0/0.10.",
+      "remediation": "R1(config)# interface GigabitEthernet0/0.10\nR1(config-subif)# ip address 10.10.10.1 255.255.255.0",
+      "expected_result": "Subinterface IP becomes 10.10.10.1; hosts successfully ping gateway and route packets."
+    },
+    {
+      "id": "F4",
+      "title": "Missing NAT / PAT Translation Configuration",
+      "affected_device": "R1 Router",
+      "status": "DETECTED",
+      "explanation": "R1 has no dynamic PAT overload statement linking internal branch subnets to WAN interface GigabitEthernet0/1.",
+      "impact": "Internal 10.10.0.0/16 packets exit to ISP without translation; ISP drops RFC 1918 private source packets.",
+      "evidence": "No 'ip nat inside source list ... overload' detected in configuration.",
+      "remediation": "R1(config)# ip access-list standard 1\nR1(config-std-nacl)# permit 10.10.0.0 0.0.255.255\nR1(config)# ip nat inside source list 1 interface GigabitEthernet0/1 overload",
+      "expected_result": "Dynamic translations recorded in 'show ip nat translations'; outbound ping to 198.51.100.10 succeeds."
+    },
+    {
+      "id": "F5",
+      "title": "Incorrect Guest ACL: Internal Subnet Denials Missing",
+      "affected_device": "R1 (ip access-list extended GUEST-IN)",
+      "status": "DETECTED",
+      "explanation": "The Guest ACL contains a broad 'permit any' without preceding 'deny' rules for Server VLAN (10.10.30.0/24) and Management VLAN (10.10.99.0/24).",
+      "impact": "Severe security breach: Guests can access internal company server and switch management interfaces directly.",
+      "evidence": "ACL GUEST-IN permits 10.10.20.0/24 to any without blocking 10.10.30.0/24 or 10.10.99.0/24.",
+      "remediation": "R1(config)# ip access-list extended GUEST-IN\nR1(config-ext-nacl)# 10 deny ip 10.10.20.0 0.0.0.255 10.10.30.0 0.0.0.255\nR1(config-ext-nacl)# 20 deny ip 10.10.20.0 0.0.0.255 10.10.99.0 0.0.0.255\nR1(config-ext-nacl)# 30 permit ip 10.10.20.0 0.0.0.255 any",
+      "expected_result": "Guest ping to 10.10.30.10 is Destination Host Unreachable; ping to 198.51.100.10 (Internet) succeeds."
+    }
+  ],
+  "devices": {
+    "ISP": {
+      "hostname": "ISP",
+      "type": "isp",
+      "ssh_version": null,
+      "interfaces": [
+        "IP-Address",
+        "GigabitEthernet0/0",
+        "GigabitEthernet0/1",
+        "GigabitEthernet0/2",
+        "Vlan1"
+      ],
+      "dhcp_pools": [],
+      "vlans": []
+    },
+    "R1": {
+      "hostname": "R1",
+      "type": "router",
+      "ssh_version": 2,
+      "interfaces": [
+        "IP-Address",
+        "GigabitEthernet0/0",
+        "GigabitEthernet0/0.10",
+        "GigabitEthernet0/0.20",
+        "GigabitEthernet0/0.30",
+        "GigabitEthernet0/0.99",
+        "GigabitEthernet0/1",
+        "GigabitEthernet0/2",
+        "Vlan1"
+      ],
+      "dhcp_pools": [
+        "EMPLOYEE",
+        "GUEST"
+      ],
+      "vlans": []
+    },
+    "Unknown": {
+      "hostname": "Unknown",
+      "type": "router",
+      "ssh_version": null,
+      "interfaces": [],
+      "dhcp_pools": [],
+      "vlans": []
+    },
+    "SW1": {
+      "hostname": "SW1",
+      "type": "switch",
+      "ssh_version": 2,
+      "interfaces": [
+        "IP-Address",
+        "Vlan1",
+        "Vlan99",
+        "FastEthernet0/1",
+        "FastEthernet0/2",
+        "FastEthernet0/5",
+        "FastEthernet0/6",
+        "FastEthernet0/24",
+        "GigabitEthernet0/1",
+        "GigabitEthernet0/2"
+      ],
+      "dhcp_pools": [],
+      "vlans": [
+        10,
+        20,
+        30,
+        99,
+        1,
+        1002,
+        1003,
+        1004,
+        1005
+      ]
+    },
+    "SW2": {
+      "hostname": "SW2",
+      "type": "switch",
+      "ssh_version": 2,
+      "interfaces": [
+        "IP-Address",
+        "Vlan1",
+        "Vlan99",
+        "FastEthernet0/1",
+        "FastEthernet0/2",
+        "FastEthernet0/3",
+        "FastEthernet0/4",
+        "FastEthernet0/5",
+        "FastEthernet0/6",
+        "FastEthernet0/7",
+        "FastEthernet0/24",
+        "GigabitEthernet0/1",
+        "GigabitEthernet0/2",
+        "range"
+      ],
+      "dhcp_pools": [],
+      "vlans": [
+        10,
+        20,
+        30,
+        99,
+        1,
+        1002,
+        1003,
+        1004,
+        1005
+      ]
+    }
+  }
+}

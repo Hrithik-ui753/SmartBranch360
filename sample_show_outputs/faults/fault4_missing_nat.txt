@@ -1,0 +1,14 @@
+! Fault 4: Missing NAT/PAT configuration on R1
+hostname R1
+!
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 10.10.10.1 255.255.255.0
+!
+interface GigabitEthernet0/1
+ ip address 203.0.113.2 255.255.255.252
+!
+! Notice: No "ip nat inside source list 1 interface GigabitEthernet0/1 overload"
+! Notice: Interfaces missing "ip nat inside" / "ip nat outside"
+!
+

@@ -1,0 +1,9 @@
+! Fault 2: Missing DHCP pool on R1 (EMPLOYEE pool omitted)
+hostname R1
+!
+ip dhcp pool GUEST
+ network 10.10.20.0 255.255.255.0
+ default-router 10.10.20.1
+ dns-server 8.8.8.8
+!
+

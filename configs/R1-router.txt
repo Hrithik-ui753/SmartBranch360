@@ -1,0 +1,88 @@
+enable
+configure terminal
+hostname R1
+no ip domain-lookup
+enable secret Str0ngEnableSecret
+service password-encryption
+ip domain-name smartbranch.local
+username netadmin privilege 15 secret NetAdm1nSecret
+crypto key generate rsa modulus 1024
+ip ssh version 2
+
+! Router-on-a-stick: G0/0 to SW1 G0/1
+interface GigabitEthernet0/0
+ no shutdown
+exit
+
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 10.10.10.1 255.255.255.0
+ ip nat inside
+exit
+interface GigabitEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 10.10.20.1 255.255.255.0
+ ip nat inside
+ ip access-group GUEST-IN in
+exit
+interface GigabitEthernet0/0.30
+ encapsulation dot1Q 30
+ ip address 10.10.30.1 255.255.255.0
+ ip nat inside
+exit
+interface GigabitEthernet0/0.99
+ encapsulation dot1Q 99
+ ip address 10.10.99.1 255.255.255.0
+ ip nat inside
+exit
+
+! WAN to simulated ISP
+interface GigabitEthernet0/1
+ ip address 203.0.113.2 255.255.255.252
+ ip nat outside
+ no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+
+! DHCP: reserve low addresses for gateways and static infrastructure
+ip dhcp excluded-address 10.10.10.1 10.10.10.20
+ip dhcp excluded-address 10.10.20.1 10.10.20.20
+ip dhcp pool EMPLOYEE
+ network 10.10.10.0 255.255.255.0
+ default-router 10.10.10.1
+ dns-server 10.10.30.10
+exit
+ip dhcp pool GUEST
+ network 10.10.20.0 255.255.255.0
+ default-router 10.10.20.1
+ dns-server 8.8.8.8
+exit
+
+! PAT for all branch VLANs
+access-list 1 permit 10.10.0.0 0.0.255.255
+ip nat inside source list 1 interface GigabitEthernet0/1 overload
+
+! Guest may reach non-private destinations only; deny all branch internal networks.
+ip access-list extended GUEST-IN
+ deny ip 10.10.20.0 0.0.0.255 10.10.10.0 0.0.0.255
+ deny ip 10.10.20.0 0.0.0.255 10.10.30.0 0.0.0.255
+ deny ip 10.10.20.0 0.0.0.255 10.10.99.0 0.0.0.255
+ permit ip 10.10.20.0 0.0.0.255 any
+exit
+
+! Only the management subnet can open VTY sessions to the router.
+ip access-list standard SSH-MGMT
+ permit 10.10.99.0 0.0.0.255
+ deny any
+exit
+line vty 0 4
+ login local
+ transport input ssh
+ access-class SSH-MGMT in
+exit
+end
+write memory
+
+! Note: management-PC-to-switch SSH is separately restricted on each switch.
+! The guest ACL is applied inbound on the guest subinterface, after DHCP broadcasts
+! have been handled by the local router interface.

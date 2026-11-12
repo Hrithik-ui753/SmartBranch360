@@ -1,0 +1,9 @@
+! Fault 3: Incorrect Gateway Address on R1 Subinterface Gi0/0.10
+hostname R1
+!
+interface GigabitEthernet0/0.10
+ encapsulation dot1Q 10
+ ip address 10.10.10.254 255.255.255.0
+ ip nat inside
+!
+

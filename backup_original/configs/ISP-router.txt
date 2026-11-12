@@ -1,0 +1,19 @@
+enable
+configure terminal
+hostname ISP
+interface GigabitEthernet0/0
+ description TO_BRANCH_R1
+ ip address 203.0.113.1 255.255.255.252
+ no shutdown
+exit
+interface GigabitEthernet0/1
+ description SIMULATED_INTERNET_TEST_LAN
+ ip address 198.51.100.1 255.255.255.0
+ no shutdown
+exit
+end
+write memory
+
+! Add a Server-PT to ISP G0/1 network:
+! IP 198.51.100.10 /24, gateway 198.51.100.1.
+! From branch clients, ping 198.51.100.10 to test NAT and routing.

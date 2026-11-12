@@ -1,0 +1,13 @@
+R1#show ip nat statistics
+Total active translations: 4 (0 static, 4 dynamic; 4 extended)
+Outside interfaces:
+  GigabitEthernet0/1
+Inside interfaces:
+  GigabitEthernet0/0.10, GigabitEthernet0/0.20, GigabitEthernet0/0.30, GigabitEthernet0/0.99
+Hits: 284  Misses: 4
+CEF Translated packets: 284, CEF Punted packets: 0
+Expired translations: 12
+Dynamic mappings:
+-- Inside Source
+[Id: 1] access-list 1 interface GigabitEthernet0/1 refcount 4
+
